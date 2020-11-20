@@ -1,4 +1,4 @@
-package cn.myh.twesqu.entity;
+package cn.myh.twesqu.common.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
