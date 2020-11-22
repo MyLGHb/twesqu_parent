@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 标签控制层
@@ -30,7 +31,7 @@ public class LabelController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Result add(Label label) {
+    public Result add(@RequestBody Label label) {
         labelService.addOrUpdate(label);
         return new Result(true,StatusCode.OK,"增加成功");
     }
@@ -46,6 +47,18 @@ public class LabelController {
     public Result deleteById(@PathVariable String id) {
         labelService.deleteById(id);
         return new Result(true,StatusCode.OK,"删除成功");
+    }
+
+    @RequestMapping(value="/search",method=RequestMethod.POST)
+    public Result searchByCondition(@RequestBody Map searchMap) {
+        return new Result(true,StatusCode.OK,"查询成功",labelService.searchByCondition(searchMap));
+    }
+
+    @RequestMapping(value="/search/{page}/{size}",method=RequestMethod.POST)
+    public Result searchByCondition(@RequestBody Map searchMap,
+                                    @PathVariable int page, @PathVariable int size) {
+        return new Result(true,StatusCode.OK,"查询成功",
+                labelService.searchByCondition(searchMap,page,size));
     }
 
 }
