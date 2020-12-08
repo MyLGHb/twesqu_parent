@@ -1,6 +1,7 @@
 package cn.myh.twesqu.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -92,6 +93,7 @@ public class ArticleService {
 	 * @param article
 	 */
 	public void add(Article article) {
+		article.setCreatetime(new Date());
 		 article.setId( idWorker.nextId()+"" );
 		articleDao.save(article);
 	}

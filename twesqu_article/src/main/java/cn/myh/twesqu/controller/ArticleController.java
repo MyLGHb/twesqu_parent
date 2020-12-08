@@ -1,4 +1,5 @@
 package cn.myh.twesqu.controller;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -93,6 +94,7 @@ public class ArticleController {
 	@RequestMapping(value="/{id}",method= RequestMethod.PUT)
 	public Result update(@RequestBody Article article, @PathVariable String id ){
 		article.setId(id);
+		article.setUpdatetime(new Date());
 		articleService.update(article);
 		return new Result(true,StatusCode.OK,"修改成功");
 	}
