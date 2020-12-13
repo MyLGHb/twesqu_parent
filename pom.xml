@@ -8,6 +8,7 @@
         <module>twesqu_common</module>
         <module>twesqu_base</module>
         <module>twesqu_article</module>
+        <module>twesqu_search</module>
     </modules>
 
     <groupId>cn.myh.twesqu</groupId>
