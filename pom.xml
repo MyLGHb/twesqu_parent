@@ -9,6 +9,7 @@
         <module>twesqu_base</module>
         <module>twesqu_article</module>
         <module>twesqu_search</module>
+        <module>twesqu_user</module>
     </modules>
 
     <groupId>cn.myh.twesqu</groupId>
