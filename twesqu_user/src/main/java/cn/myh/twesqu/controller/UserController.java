@@ -1,10 +1,12 @@
 package cn.myh.twesqu.controller;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import cn.myh.twesqu.common.entity.PageResult;
 import cn.myh.twesqu.common.entity.Result;
 import cn.myh.twesqu.common.entity.StatusCode;
+import cn.myh.twesqu.common.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,8 +32,24 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private JwtUtil jwtUtil;
+
+	@RequestMapping(value = "/login",method = RequestMethod.POST)
+	public Result login(@RequestBody Map<String,String> reqParam) {
+		System.out.println(reqParam.get("regName")+"/"+reqParam.get("password"));
+		User user = userService.findByUsernameAndPassword(reqParam.get("regName"), reqParam.get("password"));
+		if(user == null) return new Result(false,StatusCode.LOGIN_ERROR,"用户名或密码错误");
+
+		String token = jwtUtil.createJWT(user.getUid(), user.getRegName(), "user");
+		Map<String,Object> map = new HashMap<>();
+		map.put("token",token);
+		map.put("name",user.getRegName());
+		return new Result(true,StatusCode.OK,"登录成功",map);
+	}
+
 	@RequestMapping(value = "/register/{code}",method = RequestMethod.POST)
-	public Result register(User user, String code) {
+	public Result register(@RequestBody User user,@PathVariable String code) {
 		userService.add(user,code);
 		return new Result(true,StatusCode.OK,"注册成功");
 	}
@@ -40,6 +58,13 @@ public class UserController {
 	public Result sendSms(@PathVariable String mobile) {
 		userService.sendSms(mobile);
 		return new Result(true,StatusCode.OK,"发送成功");
+	}
+
+	@RequestMapping(value = "/connectTest")
+	public Map<String,String> connectTest() {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("连接测试","successful");
+		return map;
 	}
 	
 	

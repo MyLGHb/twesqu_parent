@@ -15,3 +15,8 @@ spring:
     host: localhost
   rabbitmq:
     host: localhost
+
+jwt:
+  config:
+    key: twesqu
+    ttl: 3600000

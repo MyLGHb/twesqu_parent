@@ -10,5 +10,7 @@ import cn.myh.twesqu.pojo.User;
  *
  */
 public interface UserDao extends JpaRepository<User,String>,JpaSpecificationExecutor<User>{
+
+    User findByRegName(String regName);
 	
 }

@@ -9,12 +9,14 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import cn.myh.twesqu.common.util.IdWorker;
+import cn.myh.twesqu.common.util.JwtUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -43,12 +45,27 @@ public class UserService {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+	public User findByUsernameAndPassword(String regname, String password) {
+		User user = userDao.findByRegName(regname);
+		if(user!=null && passwordEncoder.matches(password,user.getPassword())) {
+			return user;
+		} else {
+			return null;
+		}
+	}
+
 	public void add(User user, String code) {
 		String syscode = (String) redisTemplate.opsForValue().get("smscode_"+user.getPhonenum());
 		if(StringUtils.isEmpty(syscode)) throw new RuntimeException("请点击获取验证码");
 		if(!syscode.equals(code)) throw new RuntimeException("验证码输入错误");
+		String encodePassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodePassword);
 		user.setUid(idWorker.nextId()+"");
 		userDao.save(user);
+		redisTemplate.delete("smscode_"+user.getPhonenum());
 	}
 
 	public void sendSms(String mobile) {
