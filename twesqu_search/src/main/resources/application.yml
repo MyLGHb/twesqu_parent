@@ -2,7 +2,7 @@ server:
   port: 9003
 spring: 
   application:  
-    name: twesqu_search #指定服务名
+    name: twesqu-search #指定服务名
 #  datasource:
 #    driverClassName: com.mysql.jdbc.Driver
 #    url: jdbc:mysql://127.0.0.1:3306/twesqu_article?characterEncoding=UTF8
