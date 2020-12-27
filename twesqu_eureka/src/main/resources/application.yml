@@ -1,0 +1,8 @@
+server:
+  port: 6868
+eureka:
+  client:
+    registerWithEureka: false #将此服务注册到eureka
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka/

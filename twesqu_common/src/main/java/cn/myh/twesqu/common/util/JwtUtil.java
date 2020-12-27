@@ -39,7 +39,7 @@ public class JwtUtil {
         JwtBuilder jwtBuilder = Jwts.builder().setId(id)
                 .setSubject(subject)
                 .setIssuedAt(now)
-                .signWith(SignatureAlgorithm.ES256, key)
+                .signWith(SignatureAlgorithm.HS256, key)
                 .claim("roles", roles);
         if(ttl > 0) jwtBuilder.setExpiration(new Date(ctm+ttl));
         return jwtBuilder.compact();

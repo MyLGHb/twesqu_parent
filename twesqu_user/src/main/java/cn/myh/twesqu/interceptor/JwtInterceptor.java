@@ -14,6 +14,15 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private JwtUtil jwtUtil;
 
+    /**
+     * 前端请求接口时要加上头信息Authorization
+     * 内容为Bearer+空格+token
+     * @param request
+     * @param response
+     * @param handler
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
