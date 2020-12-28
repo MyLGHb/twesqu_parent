@@ -15,6 +15,9 @@ public class Result {
 
     private Object data;
 
+    public Result() {
+    }
+
     public Result(boolean flag, Integer code, String message) {
         super();
         this.flag = flag;

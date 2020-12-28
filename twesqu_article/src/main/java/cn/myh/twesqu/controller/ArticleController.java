@@ -3,6 +3,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import cn.myh.twesqu.client.LabelClient;
 import cn.myh.twesqu.common.entity.PageResult;
 import cn.myh.twesqu.common.entity.Result;
 import cn.myh.twesqu.common.entity.StatusCode;
@@ -31,8 +32,18 @@ public class ArticleController {
 
 	@Autowired
 	private ArticleService articleService;
-	
-	
+	@Autowired
+	private LabelClient labelClient;
+
+	/**
+	 * 调用base服务的标签查询
+	 */
+	@RequestMapping(value = "/label/{labelId}")
+	public Result findByLabelId(@PathVariable String labelId) {
+		return labelClient.findById(labelId);
+	}
+
+
 	/**
 	 * 查询全部数据
 	 * @return
