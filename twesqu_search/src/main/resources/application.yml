@@ -11,8 +11,20 @@ spring:
 #  jpa:
 #    database: MySQL
 #    show-sql: true
+
+#高版本elasticsearch的数据源配置
+#  data:
+#      elasticsearch:
+#        client:
+#          reactive:
+#            endpoints: local:9300
   data:
       elasticsearch:
-        client:
-          reactive:
-            endpoints: local:9300
+        cluster-nodes: 127.0.0.1:9300
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka
+    instance:
+      prefer-ip-adderss: true

@@ -17,3 +17,10 @@ spring:
     mongodb:
       host: localhost
       database: discudb
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka
+    instance:
+      prefer-ip-adderss: true
