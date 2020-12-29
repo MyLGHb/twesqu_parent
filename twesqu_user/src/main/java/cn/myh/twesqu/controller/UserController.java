@@ -66,8 +66,8 @@ public class UserController {
 		map.put("连接测试","successful");
 		return map;
 	}
-	
-	
+
+
 	/**
 	 * 查询全部数据
 	 * @return
