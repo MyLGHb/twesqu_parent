@@ -1,0 +1,60 @@
+package cn.myh.twesqu.friend.service;
+
+import cn.myh.twesqu.friend.dao.FriendDao;
+import cn.myh.twesqu.friend.dao.NoFriendDao;
+import cn.myh.twesqu.friend.pojo.Friend;
+import cn.myh.twesqu.friend.pojo.NoFriend;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public class FriendService {
+
+    @Autowired
+    private FriendDao friendDao;
+    @Autowired
+    private NoFriendDao noFriendDao;
+
+    /**
+     * 添加关注，如果已存在则不重复添加，
+     * 关注状态初始为 0。
+     * 如果对方也关注自己，则设置双方的
+     * 关注状态为 1 ，即相互关注。
+     * @param userid
+     * @param friendid
+     * @return
+     */
+    @Transactional
+    public int addFriend(String userid, String friendid) {
+        if(friendDao.selectCount(userid,friendid) > 0) return 0;
+        if(friendDao.selectCount(friendid,userid) > 0) {
+            friendDao.save(new Friend(userid,friendid,"1"));
+            friendDao.updateLike(friendid,userid,"1");
+            return 1;
+        }
+        friendDao.save(new Friend(userid,friendid,"0"));
+        return 1;
+    }
+
+    /**
+     * 添加不喜欢(关注)记录
+     */
+    public void addNoFriend(String userid, String friendid) {
+        if (noFriendDao.selectCount(userid,friendid) > 0) return;
+        noFriendDao.save(new NoFriend(userid,friendid));
+    }
+
+    /**
+     * 取消关注，如果对方关注自己则
+     * 更新对方的关注状态为单向关注
+     * @param userid
+     * @param friendid
+     */
+    @Transactional
+    public void deleteFriend(String userid, String friendid) {
+        friendDao.deleteFriend(userid,friendid);
+        friendDao.updateLike(friendid,userid,"0");
+    }
+
+}

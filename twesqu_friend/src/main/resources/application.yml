@@ -1,0 +1,21 @@
+server:
+  port: 9005
+spring:
+  application:
+    name: twesqu-friend
+  datasource:
+    url: jdbc:mysql://localhost:3306/twesqu_friend?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+  jpa:
+    database: MYSQL
+    show-sql: true
+    generate-ddl: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka
+    instance:
+      prefer-ip-adderss: true

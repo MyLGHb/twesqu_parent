@@ -11,6 +11,7 @@
         <module>twesqu_search</module>
         <module>twesqu_user</module>
         <module>twesqu_eureka</module>
+        <module>twesqu_friend</module>
     </modules>
 
     <groupId>cn.myh.twesqu</groupId>
