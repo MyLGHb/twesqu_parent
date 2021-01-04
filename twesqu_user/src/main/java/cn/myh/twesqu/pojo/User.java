@@ -30,8 +30,25 @@ public class User implements Serializable{
 	private Date birthTime;//出生时间
 	private Date regTime;//注册时间
 	private Date updateTime;//修改时间
+	private Integer concernsNum;
+	private Integer fansNum;
 
-	
+	public Integer getConcernsNum() {
+		return concernsNum;
+	}
+
+	public void setConcernsNum(Integer concernsNum) {
+		this.concernsNum = concernsNum;
+	}
+
+	public Integer getFansNum() {
+		return fansNum;
+	}
+
+	public void setFansNum(Integer fansNum) {
+		this.fansNum = fansNum;
+	}
+
 	public String getUid() {
 		return uid;
 	}

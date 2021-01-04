@@ -16,11 +16,11 @@ spring:
   rabbitmq:
     host: localhost
 
-# ttl 有效期5分钟
+# ttl 有效期20分钟
 jwt:
   config:
     key: twesqu
-    ttl: 300000
+    ttl: 1200000
 
 eureka:
   client:

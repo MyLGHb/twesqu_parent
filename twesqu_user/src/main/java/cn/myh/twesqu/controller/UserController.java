@@ -35,6 +35,11 @@ public class UserController {
 	@Autowired
 	private JwtUtil jwtUtil;
 
+	/**
+	 * 登录接口
+	 * @param reqParam {"regName":"test123","password":"12345"}
+	 * @return
+	 */
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public Result login(@RequestBody Map<String,String> reqParam) {
 		System.out.println(reqParam.get("regName")+"/"+reqParam.get("password"));
@@ -65,6 +70,18 @@ public class UserController {
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("连接测试","successful");
 		return map;
+	}
+
+	@RequestMapping(value = "/incfans/{uid}/{num}",method = RequestMethod.POST)
+	public void incFansCount(@PathVariable String uid, @PathVariable int num) {
+		System.out.println("/incfans/{uid}/{num} 66666");
+		userService.incFansCount(uid,num);
+	}
+
+	@RequestMapping(value = "/inccons/{uid}/{num}",method = RequestMethod.POST)
+	public void incConcernsCount(@PathVariable String uid, @PathVariable int num) {
+		System.out.println("/inccons/{uid}/{num} 66666");
+		userService.incConcernsNum(uid,num);
 	}
 
 

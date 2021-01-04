@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import cn.myh.twesqu.dao.UserDao;
 import cn.myh.twesqu.pojo.User;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 /**
@@ -81,6 +82,24 @@ public class UserService {
 		map.put("mobile",mobile);
 		map.put("code",code+"");
 		rabbitTemplate.convertAndSend("reg_sms",map);
+	}
+
+	/**
+	 *更新粉丝数
+	 */
+	@Transactional
+	public void incFansCount(String uid, int num) {
+		userDao.updateFansCount(uid,num);
+	}
+
+	/**
+	 * 更新关注数
+	 * @param uid
+	 * @param num
+	 */
+	@Transactional
+	public void incConcernsNum(String uid, int num) {
+		userDao.updateConcernsCount(uid,num);
 	}
 
 	/**
