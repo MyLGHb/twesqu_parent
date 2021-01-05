@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableEurekaClient
-@EnableDiscoveryClient
+@EnableDiscoveryClient //通用的服务发现注解
 @EnableFeignClients
 public class ArticleApplication {
 

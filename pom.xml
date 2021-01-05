@@ -12,6 +12,7 @@
         <module>twesqu_user</module>
         <module>twesqu_eureka</module>
         <module>twesqu_friend</module>
+        <module>twesqu_manager</module>
     </modules>
 
     <groupId>cn.myh.twesqu</groupId>

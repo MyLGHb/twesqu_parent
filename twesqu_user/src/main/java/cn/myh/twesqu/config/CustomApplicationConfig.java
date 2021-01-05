@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 /**
  * 添加拦截器
  */
-//@Configuration
+@Configuration
 public class CustomApplicationConfig extends WebMvcConfigurationSupport {
 
     @Autowired

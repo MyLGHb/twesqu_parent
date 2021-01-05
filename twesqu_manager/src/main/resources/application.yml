@@ -1,0 +1,30 @@
+server:
+  port: 9011
+spring:
+  application:
+    name: twesqu-manager
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:6868/eureka
+  instance:
+    prefer-ip-address: true
+
+zuul:
+  routes:
+    twesqu-base:
+      path: /label/**
+      serviceId: twesqu-base
+    twesqu-article:
+      path: /article/**
+      serviceId: twesqu-article
+    twesqu-search:
+      path: /search/**
+      serviceId: twesqu-search
+    twesqu-user:
+      path: /user/**
+      serviceId: twesqu-user
+    twesqu-friend:
+      path: /friend/**
+      serviceId: twesqu-friend
