@@ -1,0 +1,17 @@
+server:
+  port: 9300
+spring:
+  application:
+    name: twesqu-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/mylgee/twesqu_config.git
+  rabbitmq:
+    host: localhost
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
