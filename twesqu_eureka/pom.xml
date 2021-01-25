@@ -18,6 +18,51 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>spring</id>
+            <url>https://maven.aliyun.com/repository/spring</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+        <finalName>twe_app</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--自动构建dockerfile-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <imageName>
+                        http://192.168.188.8:5000/${project.artifactId}:${project.version}
+                    </imageName>
+                    <!-- <forceTags>true</forceTags> 强制覆盖 -->
+                    <baseImage>jdk1.8</baseImage>
+                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <dockerHost>http://192.168.188.8:2375</dockerHost>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>
 
