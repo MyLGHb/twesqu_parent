@@ -23,15 +23,15 @@ public class DataIOResource {
     @Autowired
     private DataModelService dataModelService;
 
-    @PostMapping("excelOutput")
-    public void excelOutput(String tableName, @RequestBody TestModel model, HttpServletResponse response) {
-        ExcelContent data = dataModelService.getExcelOutputData(tableName, model);
+    @GetMapping("/excelOutput")
+    public void excelOutput(String tableName, HttpServletResponse response) throws Exception {
+        ExcelContent data = dataModelService.getExcelOutputData(tableName, null);
         List<ExcelContent> excelContentList = new ArrayList<>();
         excelContentList.add(data);
         ExcelExportUtil.exportExcel(response,excelContentList,"excel导出测试");
     }
 
-    @PostMapping("excelInput")
+    @PostMapping("/excelInput")
     public ImportResult excelInput(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty() || file.getSize() == 0)
             return ImportResult.createResult(500, "上传文件为空", null);

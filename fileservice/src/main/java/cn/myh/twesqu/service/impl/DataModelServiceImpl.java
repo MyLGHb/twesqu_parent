@@ -28,8 +28,21 @@ public class DataModelServiceImpl implements DataModelService {
     @Autowired
     private TransactionTemplate transactionTemplate;
 
+    /**
+     * 获取指定表的数据，封装为要导出的数据模型
+     * @param tableName
+     * @param model
+     * @return
+     */
     @Override
     public ExcelContent getExcelOutputData(String tableName, TestModel model) {
+        boolean flag = false;
+        if(model == null) model = new TestModel();
+        if(tableName != null) {
+            //此处判断是否存在表
+            if("test_model".equals(tableName)) flag = true;
+        }
+        if(!flag) throw new RuntimeException("表不存在！");
         ExcelContent excelContent = new ExcelContent();
         List<ExcelHeader> tableField = dataModelMapper.getTableField(tableName);
         List<Map<String, Object>> testDataList = dataModelMapper.getTestDataList(model);

@@ -9,9 +9,9 @@ public interface DataModelService {
 
     /**
      * 封装需要导出的 excle 数据
-     * @return
+     *
      */
-    ExcelContent getExcelOutputData(String tableName, TestModel model);
+    ExcelContent getExcelOutputData(String tableName, TestModel model) throws Exception;
 
     /**
      * 导入excel数据

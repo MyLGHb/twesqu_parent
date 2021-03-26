@@ -25,7 +25,7 @@ public class MybatisTest {
     private DataModelService dataModelService;
 
     @Test
-    public void getOutputDataTest() {
+    public void getOutputDataTest() throws Exception {
         TestModel model = new TestModel();
         model.setName("张三");
         ExcelContent excelOutputData = dataModelService.getExcelOutputData("test_model", model);
