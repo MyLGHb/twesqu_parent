@@ -4,6 +4,7 @@ import cn.myh.twesqu.UserApplication;
 import cn.myh.twesqu.common.util.JwtUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -24,6 +25,14 @@ public class UserApplicationTests {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Test
+    public void rabbitSendInfoTest() {
+        rabbitTemplate.convertAndSend("test_info","Hello!");
+    }
 
     @Test
     public void contextLoads() {
