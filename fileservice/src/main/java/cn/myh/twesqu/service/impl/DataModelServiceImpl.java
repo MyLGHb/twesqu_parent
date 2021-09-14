@@ -1,5 +1,6 @@
 package cn.myh.twesqu.service.impl;
 
+import cn.myh.twesqu.enums.TableEnum;
 import cn.myh.twesqu.mapper.DataModelMapper;
 import cn.myh.twesqu.model.ExcelContent;
 import cn.myh.twesqu.model.ExcelHeader;
@@ -30,8 +31,8 @@ public class DataModelServiceImpl implements DataModelService {
 
     /**
      * 获取指定表的数据，封装为要导出的数据模型
-     * @param tableName
-     * @param model
+     * @param tableName 要导出的表
+     * @param model 筛选条件
      * @return
      */
     @Override
@@ -40,7 +41,12 @@ public class DataModelServiceImpl implements DataModelService {
         if(model == null) model = new TestModel();
         if(tableName != null) {
             //此处判断是否存在表
-            if("test_model".equals(tableName)) flag = true;
+            for (TableEnum value : TableEnum.values()) {
+                if(value.getTableName().equals(tableName)) {
+                    flag = true;
+                    break;
+                }
+            }
         }
         if(!flag) throw new RuntimeException("表不存在！");
         ExcelContent excelContent = new ExcelContent();

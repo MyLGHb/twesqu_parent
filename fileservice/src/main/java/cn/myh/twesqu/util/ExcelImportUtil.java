@@ -95,9 +95,9 @@ public class ExcelImportUtil {
         // 1.获取工作簿名，作为表名
         content.setSheetName(sheet.getSheetName());
         // 2.获取标题
-        // Cell cell = sheet.getRow(DEFAULT_INDEX).getCell(DEFAULT_INDEX);
-        // String title = getCellString(cell);
-        // content.setTitle(title);
+         Cell cell = sheet.getRow(DEFAULT_INDEX).getCell(DEFAULT_INDEX);
+         String title = getCellString(cell);
+         content.setTitle(title);
         // 3.获取英文表头，作为字段名
         Row nameEnRow = sheet.getRow(NAME_EN_INDEX);
         List<ExcelHeader> headerRowList = getHeadList(nameEnRow);
